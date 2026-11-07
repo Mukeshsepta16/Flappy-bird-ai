@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+backend/data/scores.json
+backend/data/*.tmp
+.DS_Store

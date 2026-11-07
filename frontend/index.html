@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Flappy Bird AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Watch a Flappy Bird agent learn to fly with Q-Learning, SARSA and TD prediction.">
+  <meta name="theme-color" content="#5db9e8">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/views.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script>try{var t=localStorage.getItem('fbai.theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+    <svg class="hills" viewBox="0 0 1200 300" preserveAspectRatio="none">
+      <path class="h-far" d="M0 180 C150 90 280 210 440 140 S720 70 880 150 1080 120 1200 170 V300 H0z"/>
+      <path class="h-near" d="M0 230 C160 160 300 260 480 205 S760 150 930 215 1110 200 1200 235 V300 H0z"/>
+    </svg>
+  </div>
+
+  <a class="skip" href="#outlet">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#/" aria-label="Flappy Bird AI home">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="32" fill="#ffd532" stroke="#c88c14" stroke-width="5"/><ellipse cx="38" cy="58" rx="14" ry="9" fill="#f0aa1e"/><circle cx="62" cy="42" r="10" fill="#fff"/><circle cx="65" cy="42" r="5" fill="#141414"/><path d="M76 50 96 56 76 64z" fill="#fa5a28"/></svg>
+      <span>Flappy Bird AI</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a data-route="/" data-icon="home" href="#/"><b>Home</b></a>
+      <a data-route="/play" data-icon="play" href="#/play"><b>Play</b></a>
+      <a data-route="/learn" data-icon="learn" href="#/learn"><b>Learn</b></a>
+      <a data-route="/models" data-icon="models" href="#/models"><b>Models</b></a>
+      <a data-route="/leaderboard" data-icon="trophy" href="#/leaderboard"><b>Leaderboard</b></a>
+    </nav>
+    <div class="actions">
+      <span class="status" id="api-status" data-state="ok" role="status"><i></i><span>API online</span></span>
+      <button class="icon-btn" id="theme" type="button" aria-label="Toggle theme"></button>
+    </div>
+  </header>
+
+  <main id="outlet" class="outlet"></main>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <noscript><p style="padding:2rem">This app needs JavaScript.</p></noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

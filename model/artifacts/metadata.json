@@ -1,0 +1,36 @@
+{
+  "models": [
+    {
+      "id": "q", "name": "Q-Learning", "type": "Off-policy TD control", "playable": true,
+      "file": "q_table.json",
+      "results": [
+        ["Episodes trained", "5,000"], ["Avg reward (last 100)", "394.4"],
+        ["Greedy eval score (30 games, seed 42)", "38.0"], ["Pipe success rate", "93.5%"],
+        ["Training time", "21 s"], ["Table", "5,760 states × 2 actions = 11,520 Q-values"]
+      ],
+      "stats": {"episodes": 5000, "eval_score": 38.0, "success_rate": 93.5}
+    },
+    {
+      "id": "s", "name": "SARSA", "type": "On-policy TD control", "playable": true,
+      "file": "sarsa_table.json",
+      "results": [
+        ["Episodes trained", "5,000"], ["Avg reward (last 100)", "312.5"],
+        ["Greedy eval score (30 games, seed 42)", "46.5"], ["Pipe success rate", "94.7%"],
+        ["Training time", "23 s"], ["Table", "5,760 states × 2 actions = 11,520 Q-values"]
+      ],
+      "stats": {"episodes": 5000, "eval_score": 46.5, "success_rate": 94.7}
+    },
+    {
+      "id": "v", "name": "TD Prediction",
+      "type": "State-value estimation for the Q-Learning policy (it does not fly the bird)", "playable": false,
+      "file": "td_values.json",
+      "results": [
+        ["Episodes trained", "2,500"], ["Avg reward of the policy (5% random)", "80.1"],
+        ["Value RMSE vs real returns", "28.9"], ["Pipe success rate", "92.3%"],
+        ["Training time", "8 s"], ["Table", "V(s) for 5,760 states"]
+      ],
+      "stats": {"episodes": 2500, "eval_score": null, "success_rate": 92.3}
+    }
+  ],
+  "comparison_note": "5 seeds, greedy score: Q-Learning 27.4 ± 2.2, SARSA 29.7 ± 5.4 (no clear winner)."
+}

@@ -1,0 +1,61 @@
+/* ---------- scenery ---------- */
+.scene { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.hills { position: absolute; left: 0; bottom: 0; width: 100%; height: 38vh; min-height: 200px; }
+.h-far { fill: var(--hill-far); } .h-near { fill: var(--hill-near); }
+.cloud { position: absolute; height: 54px; width: 150px; background: var(--cloud); border-radius: 60px; filter: blur(.4px); }
+.cloud::before, .cloud::after { content: ""; position: absolute; background: inherit; border-radius: 50%; }
+.cloud::before { width: 64px; height: 64px; left: 22px; top: -30px; }
+.cloud::after { width: 84px; height: 84px; right: 18px; top: -42px; }
+.c1 { top: 14%; left: -200px; animation: drift 90s linear infinite; }
+.c2 { top: 30%; left: -200px; transform: scale(.7); animation: drift 130s linear -40s infinite; }
+.c3 { top: 8%; left: -200px; transform: scale(1.2); animation: drift 170s linear -110s infinite; opacity: .8; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 20px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) clamp(14px, 3vw, 32px) 10px;
+  border-bottom: 1px solid var(--line);
+}
+/* blur lives on a pseudo-element: backdrop-filter on .topbar would become the containing block of the fixed mobile nav */
+.topbar::before { content: ""; position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--panel-solid) 62%, transparent); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 1.25rem var(--font-display); }
+.brand svg { width: 34px; height: 34px; transition: transform .4s var(--ease); }
+.brand:hover svg { transform: rotate(-14deg) translateY(-3px); }
+.nav { display: flex; gap: 4px; margin: 0 auto; padding: 4px; background: var(--soft); border-radius: 999px; }
+.nav a { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; text-decoration: none; color: var(--muted); font-weight: 600; font-size: .95rem; transition: background .25s var(--ease), color .25s; }
+.nav a b { font-weight: 600; }
+.nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav a:hover { color: var(--ink); }
+.nav a.active { background: var(--panel-solid); color: var(--ink); box-shadow: 0 2px 8px rgba(10, 40, 30, .15); }
+.actions { display: flex; align-items: center; gap: 10px; }
+.status { display: flex; align-items: center; gap: 8px; font-size: .82rem; font-weight: 600; color: var(--muted); padding: 6px 12px; background: var(--soft); border-radius: 999px; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 0 0 rgba(52, 199, 89, .6); animation: ping 2.4s infinite; }
+.status[data-state="down"] i { background: var(--coral); animation: none; }
+.icon-btn { width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--soft); cursor: pointer; transition: transform .3s var(--ease), background .2s; }
+.icon-btn:hover { transform: rotate(18deg); background: var(--line); }
+.icon-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- page ---------- */
+.outlet { width: min(1200px, 100%); margin: 0 auto; padding: clamp(18px, 3vw, 36px) clamp(14px, 3vw, 32px) 64px; }
+.view { animation: view-in .38s var(--ease) both; }
+.page-head { margin-bottom: 22px; display: grid; gap: 6px; }
+.page-head h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: #fff; text-shadow: 0 2px 10px rgba(10, 40, 30, .35); }
+.page-head p { color: rgba(255, 255, 255, .92); text-shadow: 0 1px 6px rgba(10, 40, 30, .4); }
+.section-title { margin: 56px 0 16px; font-size: 1.5rem; color: #fff; text-shadow: 0 2px 8px rgba(10, 40, 30, .35); }
+
+/* ---------- small screens: tab bar ---------- */
+@media (max-width: 860px) {
+  .status span { display: none; } .status { padding: 8px; }
+  .topbar { gap: 10px; } .actions { margin-left: auto; }
+  .nav {
+    position: fixed; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); z-index: 30; margin: 0;
+    justify-content: space-between; padding: 6px; border-radius: 22px;
+    background: color-mix(in srgb, var(--panel-solid) 86%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--line); box-shadow: var(--shadow);
+  }
+  .nav a { flex: 1; flex-direction: column; gap: 2px; padding: 8px 2px; border-radius: 16px; font-size: .68rem; }
+  .nav svg { width: 22px; height: 22px; }
+  .outlet { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (max-width: 380px) { .brand span { display: none; } }

@@ -1,0 +1,26 @@
+@keyframes drift { to { transform: translateX(calc(100vw + 400px)) scale(var(--s, 1)); } }
+@keyframes ping { 70% { box-shadow: 0 0 0 8px rgba(52, 199, 89, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); } }
+@keyframes view-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes letter-in { from { opacity: 0; transform: translateY(40px) rotate(calc(var(--tilt, 0deg) * 4)) scale(.7); } to { opacity: 1; transform: rotate(var(--tilt, 0deg)); } }
+@keyframes device-in { from { opacity: 0; transform: translateY(40px) rotate(8deg) scale(.92); } to { opacity: 1; transform: rotate(2.5deg); } }
+@keyframes blink { 50% { opacity: .25; } }
+@keyframes pop-in { from { opacity: 0; transform: scale(.7) translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes hint { 50% { transform: translateX(-50%) translateY(-5px); } }
+@keyframes toast-in { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: none; } }
+@keyframes toast-out { to { opacity: 0; transform: translateX(30px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes sweep { from { transform: translateX(-100%); } to { transform: translateX(300%); } }
+@keyframes flow { to { background-position: -200% 0; } }
+@keyframes row-in { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@keyframes flash { from { background: color-mix(in srgb, var(--sun) 35%, var(--panel)); } to { background: var(--panel); } }
+
+.pop { animation: pop .3s var(--ease); }
+.flash { animation: flash .6s ease-out; }
+.hint { animation: hint 2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .cloud { display: none; }
+}
