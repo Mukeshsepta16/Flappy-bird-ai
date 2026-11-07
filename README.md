@@ -96,9 +96,20 @@ Restart the server afterwards. `model/artifacts/metadata.json` holds the human-r
 python -m unittest discover -s tests -t .
 ```
 
+## Deploy online (Render, free tier)
+
+1. Push this repo to GitHub.
+2. On [render.com](https://render.com) choose **New → Blueprint**, connect the repo and click **Apply**. `render.yaml` configures everything.
+3. After the build finishes you get a public `https://flappy-bird-ai-xxxx.onrender.com` URL.
+
+`Procfile` makes the same start command work on Railway, Heroku and similar hosts.
+
+Free-tier caveats: the service sleeps after ~15 minutes idle (the first visit then takes ~30 s to wake), and its disk is wiped on every redeploy and restart, so the leaderboard resets. For a persistent leaderboard, replace `ScoreStore` with a database.
+
 ## Production notes
 
-- Run behind gunicorn: `gunicorn "backend.app:create_app()" -w 1 --threads 4`. Use one worker, because the leaderboard is a JSON file guarded by an in-process lock. Swap `ScoreStore` for a database to scale out.
+- Local production-style run (Linux/macOS): `gunicorn "backend.app:create_app()" -w 1 --threads 4 --timeout 90`. On Windows use `pip install waitress` then `waitress-serve --threads=4 --call backend.app:create_app`.
+- Use one worker, because the leaderboard is a JSON file guarded by an in-process lock. Swap `ScoreStore` for a database to scale out.
 - Hosting the frontend elsewhere: set `window.__API_BASE__ = "https://api.example.com"` before `js/main.js` loads, and `CORS_ORIGIN=https://your-site` on the backend.
 - The leaderboard has input validation but no authentication, so scores can be forged by anyone who calls the API.
 

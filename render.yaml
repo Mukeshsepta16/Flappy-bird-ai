@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: flappy-bird-ai
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # one worker: the leaderboard JSON file is guarded by an in-process lock
+    # timeout 90: POST /api/train can run up to 30 s of CPU on a shared free instance
+    startCommand: gunicorn "backend.app:create_app()" --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 90
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
